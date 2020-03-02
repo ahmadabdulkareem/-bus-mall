@@ -1,0 +1,17 @@
+#leftImg {
+    background-position: left;
+}
+#centreImg {
+    background-position: center;
+}
+rightImg {
+    background-position: right;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    padding: 50px;
+    margin-top: 200px;
+    margin-left: 20px;
+}
