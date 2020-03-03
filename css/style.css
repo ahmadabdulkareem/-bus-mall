@@ -7,6 +7,14 @@
 rightImg {
     background-position: right;
 }
+header{
+    text-align: center;
+    background-color: bisque;
+}
+header h1 {
+    width: 200px;
+    transition: width 2s;
+}
 
 img{
     width: 200px;
@@ -16,8 +24,8 @@ img{
     margin-left: 20px;
     border-radius: 30px;
 }
-#myChart{
+/* #myChart{
     width: 50px;
     height: 50px;
     padding: 5px;
-}
+} */
