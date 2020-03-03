@@ -19,6 +19,8 @@ var centre = document.querySelector('#centre');
 var right = document.querySelector('#right');
 var section = document.querySelector('#section');
 
+
+
 left.src = `imgs/${imgsNamesArr[0]}`;
 left.alt = imgsNamesArr[0];
 left.title = imgsNamesArr[0];
@@ -31,7 +33,8 @@ right.alt = imgsNamesArr[2];
 left.title = imgsNamesArr[2];
 
 
-console.log(imgsNamesArr);
+
+
 
 
 //                                   constructor.....
@@ -54,13 +57,58 @@ for (var i = 0; i < imgsNamesArr.length; i++) {
 
 
 var leftProduct, centreProduct, rightProduct;
-function render() {
-    leftProduct = product.all[randomNum(0, product.all.length - 1)];
-    // console.log(leftProduct);
+var viewedImgs = [];
 
+//                                      render.....
+function render() {
+
+
+    leftProduct = product.all[randomNum(0, product.all.length - 1)];
     centreProduct = product.all[randomNum(0, product.all.length - 1)];
     rightProduct = product.all[randomNum(0, product.all.length - 1)];
 
+
+    while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+        render();
+    } 
+
+    while (viewedImgs.includes(leftProduct)) {
+        leftProduct = product.all[randomNum(0, product.all.length - 1)];
+
+        while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+            render();
+        } 
+        
+    }
+    
+
+    while (viewedImgs.includes(centreProduct)) {
+        centreProduct = product.all[randomNum(0, product.all.length - 1)];
+
+        while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+            render();
+        } 
+      
+        }
+        
+        
+       
+        while (viewedImgs.includes(rightProduct)) {
+            rightProduct = product.all[randomNum(0, product.all.length - 1)];
+
+            while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+                render();
+            } 
+            
+        }
+        
+        viewedImgs.push(leftProduct.name);
+        viewedImgs.push(centreProduct.name);
+        viewedImgs.push(rightProduct.name);
+    
+        while (viewedImgs.length > 3) {
+            viewedImgs.shift();
+    }
     left.setAttribute('src', leftProduct.filePath);
     left.setAttribute('alt', leftProduct.name);
     left.setAttribute('title', leftProduct.name.split('.', 1));
@@ -73,13 +121,13 @@ function render() {
     right.setAttribute('alt', rightProduct.name);
     right.setAttribute('title', rightProduct.name.split('.', 1));
 
-
-    while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-        render();
+        
     }
-    // chartFunc();
-}
 render();
+
+
+
+
 
 
 function randomNum(min, max) {
@@ -97,7 +145,7 @@ function result() {
         liE1.textContent = `${product.all[i].name} has: votes-${product.all[i].clicks},Views-${product.all[i].views}`;
         resultUl.appendChild(liE1);
     }
-    
+
 }
 
 
@@ -106,7 +154,10 @@ function result() {
 
 
 
-//event
+
+
+//                                      event
+
 var totalClicks = 0;
 section.addEventListener('click', personalise);
 function personalise(event) {
@@ -144,18 +195,17 @@ function personalise(event) {
 //                                 created chartt.....
 
 function chartFunc() {
-    //                   new Arr......products/clicks/views.......
+    //                       new Arr......products/clicks/views.......
     var productsChart = [];
     var clicksChart = [];
-    for (var i = 0; i < product.all.length; i++) { 
+    var viewsChart = [];
+    for (var i = 0; i < product.all.length; i++) {
         // mistake used imgsnamesarr
         productsChart.push(product.all[i].name);
         clicksChart.push(product.all[i].clicks);
+        viewsChart.push(product.all[i].views)
     }
-        console.log(productsChart);
-        for (var i = 0; i < product.all.length; i++) {
-            console.log(clicksChart);
-        }
+
 
 
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -167,23 +217,25 @@ function chartFunc() {
                 label: '# of Votes',
                 data: clicksChart,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 99, 132, 1)'
                 ],
                 borderWidth: 1
-            }]
+            },
+            {
+                label: '# of Views',
+                data: viewsChart,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }
+            ]
         },
         options: {
             scales: {
@@ -197,6 +249,16 @@ function chartFunc() {
     });
     return myChart;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
