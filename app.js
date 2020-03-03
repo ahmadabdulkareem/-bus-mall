@@ -1,6 +1,17 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var imgsNamesArr = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var left = document.querySelector('#left');
@@ -23,10 +34,11 @@ left.title = imgsNamesArr[2];
 console.log(imgsNamesArr);
 
 
+//                                   constructor.....
 
 function product(name) {
     this.name = name;
-    //problem was here (((FOCUS YA .)))
+    //problem was in path (FOCUS .استغفر الله.)
     this.filePath = `imgs/${this.name}`;
     this.clicks = 0;
     this.views = 0;
@@ -37,7 +49,7 @@ product.all = [];
 
 for (var i = 0; i < imgsNamesArr.length; i++) {
     new product(imgsNamesArr[i]);
-    // this.filePath;
+
 }
 
 
@@ -65,6 +77,7 @@ function render() {
     while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
         render();
     }
+    // chartFunc();
 }
 render();
 
@@ -84,6 +97,7 @@ function result() {
         liE1.textContent = `${product.all[i].name} has: votes-${product.all[i].clicks},Views-${product.all[i].views}`;
         resultUl.appendChild(liE1);
     }
+    
 }
 
 
@@ -93,10 +107,10 @@ function result() {
 
 
 //event
-var totalClicks = 0;  
+var totalClicks = 0;
 section.addEventListener('click', personalise);
 function personalise(event) {
-      if (totalClicks < 25) {
+    if (totalClicks < 25) {
         if (event.target.id !== 'section') {
             if (event.target.id === 'left') {
                 leftProduct.clicks++;
@@ -114,20 +128,95 @@ function personalise(event) {
             rightProduct.views++;
             render();
         }
-        
+
     }
     else {
-    section.removeEventListener('click', personalise);
-    result();
-}
+        section.removeEventListener('click', personalise);
+        result();
+        chartFunc();
+    }
 
 }
 
 
 
 
+//                                 created chartt.....
+
+function chartFunc() {
+    //                   new Arr......products/clicks/views.......
+    var productsChart = [];
+    var clicksChart = [];
+    for (var i = 0; i < product.all.length; i++) { 
+        // mistake used imgsnamesarr
+        productsChart.push(product.all[i].name);
+        clicksChart.push(product.all[i].clicks);
+    }
+        console.log(productsChart);
+        for (var i = 0; i < product.all.length; i++) {
+            console.log(clicksChart);
+        }
 
 
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: productsChart,             // product
+            datasets: [{
+                label: '# of Votes',
+                data: clicksChart,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    return myChart;
+}
+
+
+
+// data: clicks,
+// backgroundColor: [
+//     'rgba(255, 99, 132, 0.2)',
+//     'rgba(54, 162, 235, 0.2)',
+//     'rgba(255, 206, 86, 0.2)',
+//     'rgba(75, 192, 192, 0.2)',
+//     'rgba(153, 102, 255, 0.2)',
+//     'rgba(255, 159, 64, 0.2)'
+// ],
+// borderColor: [
+//     'rgba(255, 99, 132, 1)',
+//     'rgba(54, 162, 235, 1)',
+//     'rgba(255, 206, 86, 1)',
+//     'rgba(75, 192, 192, 1)',
+//     'rgba(153, 102, 255, 1)',
+//     'rgba(255, 159, 64, 1)'
+// ],
 
 
 
