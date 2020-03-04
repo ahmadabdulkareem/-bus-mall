@@ -67,47 +67,52 @@ function render() {
     centreProduct = product.all[randomNum(0, product.all.length - 1)];
     rightProduct = product.all[randomNum(0, product.all.length - 1)];
 
+    while(viewedImgs.includes(leftProduct) || viewedImgs.includes(centreProduct)|| viewedImgs.includes(rightProduct)|| leftProduct=== centreProduct|| centreProduct=== rightProduct|| rightProduct=== leftProduct ){
 
-    while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-        render();
-    } 
-
-    while (viewedImgs.includes(leftProduct)) {
         leftProduct = product.all[randomNum(0, product.all.length - 1)];
-
-        while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-            render();
-        } 
-        
+        rightProduct = product.all[randomNum(0, product.all.length - 1)];
+        centreProduct = product.all[randomNum(0, product.all.length - 1)];
     }
+    // while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+    //     render();
+    // } 
+
+    // while (viewedImgs.includes(leftProduct)) {
+    //     leftProduct = product.all[randomNum(0, product.all.length - 1)];
+
+    //     while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+    //         render();
+    //     } 
+        
+    // }
     
 
-    while (viewedImgs.includes(centreProduct)) {
-        centreProduct = product.all[randomNum(0, product.all.length - 1)];
+    // while (viewedImgs.includes(centreProduct)) {
+    //     centreProduct = product.all[randomNum(0, product.all.length - 1)];
 
-        while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-            render();
-        } 
+    //     while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+    //         render();
+    //     } 
       
-        }
+    //     }
         
         
        
-        while (viewedImgs.includes(rightProduct)) {
-            rightProduct = product.all[randomNum(0, product.all.length - 1)];
+    //     while (viewedImgs.includes(rightProduct)) {
+    //         rightProduct = product.all[randomNum(0, product.all.length - 1)];
 
-            while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-                render();
-            } 
+    //         while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
+    //             render();
+    //         } 
             
-        }
+    //     }
         
         viewedImgs.push(leftProduct.name);
         viewedImgs.push(centreProduct.name);
         viewedImgs.push(rightProduct.name);
-    
+
         while (viewedImgs.length > 3) {
-            viewedImgs.shift();
+            viewedImgs=[]; 
     }
     left.setAttribute('src', leftProduct.filePath);
     left.setAttribute('alt', leftProduct.name);
