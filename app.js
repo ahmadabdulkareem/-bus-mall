@@ -60,6 +60,8 @@ var leftProduct, centreProduct, rightProduct;
 var viewedImgs = [];
 
 //                                      render.....
+
+// or maybe we can give other different variabls for the same id's and use conditions.
 function render() {
 
 
@@ -67,12 +69,42 @@ function render() {
     centreProduct = product.all[randomNum(0, product.all.length - 1)];
     rightProduct = product.all[randomNum(0, product.all.length - 1)];
 
-    while(viewedImgs.includes(leftProduct) || viewedImgs.includes(centreProduct)|| viewedImgs.includes(rightProduct)|| leftProduct=== centreProduct|| centreProduct=== rightProduct|| rightProduct=== leftProduct ){
-
+    while(viewedImgs.includes(leftProduct.name) || viewedImgs.includes(centreProduct.name)|| viewedImgs.includes(rightProduct.name)|| leftProduct.name=== centreProduct.name|| centreProduct.name=== rightProduct.name|| rightProduct.name=== leftProduct.name ){
+        
         leftProduct = product.all[randomNum(0, product.all.length - 1)];
         rightProduct = product.all[randomNum(0, product.all.length - 1)];
         centreProduct = product.all[randomNum(0, product.all.length - 1)];
+
     }
+
+    viewedImgs=[];      // instead of shift
+
+    viewedImgs.push(leftProduct.name);
+    viewedImgs.push(centreProduct.name);
+    viewedImgs.push(rightProduct.name);
+    
+    
+    left.setAttribute('src', leftProduct.filePath);
+    left.setAttribute('alt', leftProduct.name);
+    left.setAttribute('title', leftProduct.name.split('.', 1));
+
+    centre.setAttribute('src', centreProduct.filePath);
+    centre.setAttribute('alt', centreProduct.name);
+    centre.setAttribute('title', centreProduct.name.split('.', 1));
+
+    right.setAttribute('src', rightProduct.filePath);
+    right.setAttribute('alt', rightProduct.name);
+    right.setAttribute('title', rightProduct.name.split('.', 1));
+    
+}
+render();
+   
+   
+    //     while (viewedImgs.length > 3) {
+    //        ...
+    // }
+
+
     // while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
     //     render();
     // } 
@@ -107,28 +139,10 @@ function render() {
             
     //     }
         
-        viewedImgs.push(leftProduct.name);
-        viewedImgs.push(centreProduct.name);
-        viewedImgs.push(rightProduct.name);
 
-        while (viewedImgs.length > 3) {
-            viewedImgs=[]; 
-    }
-    left.setAttribute('src', leftProduct.filePath);
-    left.setAttribute('alt', leftProduct.name);
-    left.setAttribute('title', leftProduct.name.split('.', 1));
-
-    centre.setAttribute('src', centreProduct.filePath);
-    centre.setAttribute('alt', centreProduct.name);
-    centre.setAttribute('title', centreProduct.name.split('.', 1));
-
-    right.setAttribute('src', rightProduct.filePath);
-    right.setAttribute('alt', rightProduct.name);
-    right.setAttribute('title', rightProduct.name.split('.', 1));
+    
 
         
-    }
-render();
 
 
 
