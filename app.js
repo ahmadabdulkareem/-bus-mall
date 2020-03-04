@@ -98,6 +98,9 @@ function render() {
     
 }
 render();
+
+
+
    
    
     //     while (viewedImgs.length > 3) {
@@ -142,7 +145,10 @@ render();
 
     
 
-        
+    function dataStore(){
+        var data= JSON.stringify(product.all);
+        localStorage.setItem("",data);
+    }
 
 
 
@@ -204,6 +210,7 @@ function personalise(event) {
         section.removeEventListener('click', personalise);
         result();
         chartFunc();
+        dataStore();
     }
 
 }
