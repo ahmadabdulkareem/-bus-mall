@@ -1,17 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var imgsNamesArr = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var left = document.querySelector('#left');
@@ -100,58 +88,16 @@ function render() {
 render();
 
 
-
-   
-   
-    //     while (viewedImgs.length > 3) {
-    //        ...
-    // }
-
-
-    // while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-    //     render();
-    // } 
-
-    // while (viewedImgs.includes(leftProduct)) {
-    //     leftProduct = product.all[randomNum(0, product.all.length - 1)];
-
-    //     while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-    //         render();
-    //     } 
-        
-    // }
-    
-
-    // while (viewedImgs.includes(centreProduct)) {
-    //     centreProduct = product.all[randomNum(0, product.all.length - 1)];
-
-    //     while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-    //         render();
-    //     } 
-      
-    //     }
-        
-        
-       
-    //     while (viewedImgs.includes(rightProduct)) {
-    //         rightProduct = product.all[randomNum(0, product.all.length - 1)];
-
-    //         while (leftProduct === centreProduct || centreProduct === rightProduct || rightProduct === leftProduct) {
-    //             render();
-    //         } 
-            
-    //     }
         
 
     
 
-    function dataStore(){
+    function storeDataUp(){
         var data= JSON.stringify(product.all);
-        localStorage.setItem("",data);
+        localStorage.setItem('products',data);
     }
 
-
-
+    
 
 
 
@@ -172,12 +118,6 @@ function result() {
     }
 
 }
-
-
-
-
-
-
 
 
 
@@ -203,6 +143,7 @@ function personalise(event) {
             centreProduct.views++;
             rightProduct.views++;
             render();
+            
         }
 
     }
@@ -210,7 +151,6 @@ function personalise(event) {
         section.removeEventListener('click', personalise);
         result();
         chartFunc();
-        dataStore();
     }
 
 }
@@ -243,7 +183,27 @@ function chartFunc() {
                 label: '# of Votes',
                 data: clicksChart,
                 backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 99, 132, 0.2)'
+
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)'
@@ -254,6 +214,25 @@ function chartFunc() {
                 label: '# of Views',
                 data: viewsChart,
                 backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
@@ -276,108 +255,17 @@ function chartFunc() {
     return myChart;
 }
 
+function storeDataGet(){
+    var data= localStorage.getItem('products');
+    if(data){
+      product.JSON.prase(data);
+      result();
+      chartFunc();
+      
+    }
+}
+storeDataGet();
 
 
-
-
-
-
-
-
-
-
-
-
-// data: clicks,
-// backgroundColor: [
-//     'rgba(255, 99, 132, 0.2)',
-//     'rgba(54, 162, 235, 0.2)',
-//     'rgba(255, 206, 86, 0.2)',
-//     'rgba(75, 192, 192, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(255, 159, 64, 0.2)'
-// ],
-// borderColor: [
-//     'rgba(255, 99, 132, 1)',
-//     'rgba(54, 162, 235, 1)',
-//     'rgba(255, 206, 86, 1)',
-//     'rgba(75, 192, 192, 1)',
-//     'rgba(153, 102, 255, 1)',
-//     'rgba(255, 159, 64, 1)'
-// ],
-
-
-
-        // while(leftProduct===rightProduct ||leftProduct===centreProduct|| rightProduct===centreProduct ){
-        //                 personalise(event);
-        //             }
-
-
-
-// section.addEventListener('click', personalise);
-// var totalClicks = 0;
-// function personalise(event) {
-
-//     //another way more likly...
-//     if (totalClicks <= 25 && event.target.id !==section) {
-//         if (event.target.id === left) {
-//             leftProduct.this.clicks++;
-//             leftProduct.this.votes++;
-//         }
-
-//         else if (event.target.id === centre) {
-//             centreProduct.this.clicks++;
-//             centreProduct.this.votes++;
-//         }
-
-//         else if (event.target.id === right) {
-//             rightProduct.this.clicks++;
-//             rightProduct.this.votes++;
-//         }
-//         totalClicks++;
-//             leftProduct.seen++;
-//             centreProduct.seen++;
-//             rightProduct.seen++;
-//             render();
-//             result();
-
-
-//     }
-
-// }
-// personalise();
-
-
-
-
-//         if (event.target.id !== 'section') {
-//             if (event.target.id === left) {
-//                 leftProduct.clicks++;
-//                 leftProduct.votes++;
-//             }
-//             else if (event.target.id === centre) {
-//                 centreProduct.clicks++;
-//                 centreProduct.votes++;
-//             }
-//             else if (event.target.id === right) {
-//                 rightProduct.clicks++;
-//                 rightProduct.votes++;
-//             }
-
-//             totalClicks++;
-//             leftProduct.seen++;
-//             centreProduct.seen++;
-//             rightProduct.seen++;
-//             
-//             result();
-
-//         }
-//         while(leftProduct===rightProduct ||leftProduct===centreProduct|| rightProduct===centreProduct ){
-//             personalise(event);
-//         }
-//     }
-
-//     else{section.removeEventListener('click',personalise);}
-// }
 
 
