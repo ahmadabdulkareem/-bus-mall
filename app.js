@@ -1,5 +1,6 @@
 
 
+// array cntain imgs names
 var imgsNamesArr = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
 
 var left = document.querySelector('#left');
@@ -8,10 +9,12 @@ var right = document.querySelector('#right');
 var section = document.querySelector('#section');
 
 
+// sorces of images 
 
 left.src = `imgs/${imgsNamesArr[0]}`;
 left.alt = imgsNamesArr[0];
 left.title = imgsNamesArr[0];
+
 centre.src = `imgs/${imgsNamesArr[1]}`;
 centre.alt = imgsNamesArr[1];
 left.title = imgsNamesArr[1];
@@ -29,15 +32,15 @@ left.title = imgsNamesArr[2];
 
 function product(name) {
     this.name = name;
-    //problem was in path (FOCUS .استغفر الله.)
+    //problem was in path (FOCUS on simples)
     this.filePath = `imgs/${this.name}`;
     this.clicks = 0;
     this.views = 0;
-    product.all.push(this);
+    product.all.push(this);   
 }
 product.all = [];
 
-
+// to store imgs to constructor array
 for (var i = 0; i < imgsNamesArr.length; i++) {
     new product(imgsNamesArr[i]);
 
@@ -45,11 +48,14 @@ for (var i = 0; i < imgsNamesArr.length; i++) {
 
 
 var leftProduct, centreProduct, rightProduct;
-var viewedImgs = [];
 
-//                                      render.....
 
-// or maybe we can give other different variabls for the same id's and use conditions.
+var viewedImgs = [];  //    created arr that should contain imgs had been displayed before and remove them from the arr after they arr more then 3 imgs.
+
+//    or maybe we can give other different variabls for the same id's and use conditions for unique imgs show.
+
+//                                      .......render.....
+
 function render() {
 
 
@@ -91,8 +97,10 @@ render();
         
 
     
+ // to store data to server
 
     function storeDataUp(){
+        // have to be stringifyed
         var data= JSON.stringify(product.all);
         localStorage.setItem('products',data);
     }
@@ -100,6 +108,7 @@ render();
     
 
 
+// picking random imgs from imgsNamesArr
 
 function randomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -124,7 +133,7 @@ function result() {
 //                                      event
 
 var totalClicks = 0;
-section.addEventListener('click', personalise);
+section.addEventListener('click', personalise);  // when click the event played
 function personalise(event) {
     if (totalClicks < 25) {
         if (event.target.id !== 'section') {
@@ -158,7 +167,7 @@ function personalise(event) {
 
 
 
-//                                 created chartt.....
+//                                 created chartt function.....
 
 function chartFunc() {
     //                       new Arr......products/clicks/views.......
@@ -166,14 +175,14 @@ function chartFunc() {
     var clicksChart = [];
     var viewsChart = [];
     for (var i = 0; i < product.all.length; i++) {
-        // mistake used imgsnamesarr
+        // mistake  imgsnamesarr
         productsChart.push(product.all[i].name);
         clicksChart.push(product.all[i].clicks);
         viewsChart.push(product.all[i].views)
     }
 
 
-
+          // this is chart 
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -255,9 +264,12 @@ function chartFunc() {
     return myChart;
 }
 
+
+// this func for get the data from server 
 function storeDataGet(){
     var data= localStorage.getItem('products');
     if(data){
+        // better to be prased
       product.JSON.prase(data);
       result();
       chartFunc();
